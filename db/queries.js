@@ -11,7 +11,7 @@ async function checkIfUserNameExists(username) {
     return rows;
 }
 
-async function addUser(user) {
+async function addUser(user, hashedPassword) {
     const query = 
     `
     INSERT INTO users (first_name, last_name, user_name, password, membership_status)
@@ -21,7 +21,7 @@ async function addUser(user) {
     const firstNameCap = user.first_name.charAt(0).toUpperCase() + user.first_name.slice(1);
     const lastNameCap = user.last_name.charAt(0).toUpperCase() + user.last_name.slice(1);
 
-    await pool.query(query, [firstNameCap, lastNameCap, user.user_name, user.password]);
+    await pool.query(query, [firstNameCap, lastNameCap, user.user_name, hashedPassword]);
 }
 
 module.exports = {
