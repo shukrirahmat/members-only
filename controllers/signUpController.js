@@ -3,15 +3,15 @@ const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
 
 const validateUser = [
-    body("user_name")
+    body("firstname")
     .trim()
     .isLength({ min: 1 })
     .withMessage(`First name is required`),
-    body("last_name")
+    body("lastname")
     .trim()
     .isLength({ min: 1 })
     .withMessage(`Last name is required`),
-    body("user_name")
+    body("username")
     .trim()
     .isLength({ min: 1 })
     .withMessage(`Username is required`),
@@ -34,9 +34,9 @@ const signUpNewMember = [
             errorArray.push({msg: "Password did not match"});
         }
 
-        const existingUsername = await db.checkIfUserNameExists(req.body.user_name);
-        if (existingUsername[0]) {
-            errorArray.push({msg: `Username "${req.body.user_name}" already exists`});
+        const usernameExists = await db.checkIfUserNameExists(req.body.username);
+        if (usernameExists[0]) {
+            errorArray.push({msg: `Username "${req.body.username}" already exists`});
         }
 
         if (errorArray.length > 0) {

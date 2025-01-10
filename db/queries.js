@@ -3,8 +3,8 @@ const pool = require("./pool");
 async function checkIfUserNameExists(username) {
     const query =
     `
-    SELECT user_name FROM users
-    WHERE user_name LIKE $1
+    SELECT username FROM users
+    WHERE username LIKE $1
     `;
 
     const {rows} = await pool.query(query,[username]);
@@ -14,17 +14,31 @@ async function checkIfUserNameExists(username) {
 async function addUser(user, hashedPassword) {
     const query = 
     `
-    INSERT INTO users (first_name, last_name, user_name, password, membership_status)
+    INSERT INTO users (firstname, lastname, username, password, membership_status)
     VALUES ($1, $2, $3, $4, 'PENDING')
     `;
 
-    const firstNameCap = user.first_name.charAt(0).toUpperCase() + user.first_name.slice(1);
-    const lastNameCap = user.last_name.charAt(0).toUpperCase() + user.last_name.slice(1);
+    const firstNameCap = user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1);
+    const lastNameCap = user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1);
 
-    await pool.query(query, [firstNameCap, lastNameCap, user.user_name, hashedPassword]);
+    await pool.query(query, [firstNameCap, lastNameCap, user.username, hashedPassword]);
+}
+
+async function findUserWithUsername(username) {
+    const query = `SELECT * FROM users WHERE username = $1`;
+    const {rows} = await pool.query(query, [username]);
+    return rows;
+}
+
+async function findUserWithID(id) {
+    const query = `SELECT * FROM users WHERE id = $1`;
+    const {rows} = await pool.query(query, [id]);
+    return rows;
 }
 
 module.exports = {
     checkIfUserNameExists,
-    addUser
+    addUser,
+    findUserWithUsername,
+    findUserWithID
 }
