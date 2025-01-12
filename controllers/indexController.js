@@ -21,8 +21,13 @@ const logOut = (req, res, next) => {
   });
 };
 
+const getJoinPage = (req, res) => {
+  res.render("joinPage", {title: "Become a member"});
+}
+
 module.exports = {
   getIndexPage,
   logIn,
   logOut,
+  getJoinPage
 };
