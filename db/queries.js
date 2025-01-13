@@ -36,9 +36,19 @@ async function findUserWithID(id) {
     return rows;
 }
 
+async function joinUser(user) {
+    const query = `
+    UPDATE users
+    SET membership_status = $1
+    WHERE id = $2
+    `
+    await pool.query(query, ['MEMBER', user.id]);
+}
+
 module.exports = {
     checkIfUserNameExists,
     addUser,
     findUserWithUsername,
-    findUserWithID
+    findUserWithID,
+    joinUser
 }

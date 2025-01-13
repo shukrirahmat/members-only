@@ -5,7 +5,8 @@ const indexController = require("../controllers/indexController");
 router.get("/", indexController.getIndexPage);
 router.post("/log-in", indexController.logIn);
 router.get("/log-out", indexController.logOut);
-router.get("/member-join", indexController.getJoinPage);
+router.get("/join", indexController.getJoinPage);
+router.post("/join", indexController.joinUser);
 
 module.exports = router;
 
