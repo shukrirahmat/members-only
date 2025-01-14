@@ -13,7 +13,8 @@ const SQL = `
         lastname VARCHAR (255),
         username VARCHAR (255),
         password VARCHAR (255),
-        membership_status VARCHAR (255)
+        membership_status BOOLEAN,
+        admin_status BOOLEAN
     );
 
     CREATE TABLE IF NOT EXISTS messages (

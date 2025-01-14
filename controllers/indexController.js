@@ -32,7 +32,7 @@ const logOut = (req, res, next) => {
 };
 
 const getJoinPage = (req, res) => {
-  if (req.user.membership_status !== "PENDING") {
+  if (req.user.membership_status) {
     return res.redirect("/");
   }
   res.render("joinPage", { title: "Become a member" });
@@ -47,7 +47,7 @@ const joinUser = async (req, res) => {
         error: "Secret code required",
       });
   }
-  if (req.body.memberCode !== process.env.MEMBER_CODE) {
+  if (req.body.memberCode !== (process.env.MEMBER_CODE && process.env.ADMIN_CODE)) {
     return res
       .status(400)
       .render("joinPage", {
@@ -55,9 +55,17 @@ const joinUser = async (req, res) => {
         error: "Wrong secret code",
       });
   }
-  await db.joinUser(req.user);
-  res.render("joinSuccess");
+  const isAdmin = req.body.memberCode === process.env.ADMIN_CODE;
+
+  await db.joinUser(req.user, isAdmin);
+  res.render("joinSuccess", {isAdmin});
 };
+
+const deleteMessage = async (req, res) => {
+  const deleteId = req.query.deleteId;
+  await db.deleteMessage(deleteId);
+  res.redirect("/");
+}
 
 module.exports = {
   getIndexPage,
@@ -65,4 +73,5 @@ module.exports = {
   logOut,
   getJoinPage,
   joinUser,
+  deleteMessage
 };

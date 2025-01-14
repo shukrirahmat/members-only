@@ -11,7 +11,7 @@
 
   <% if (locals.user) { %>
   <h1>Welcome back, <%= user.firstname %></h1>
-  <% if (locals.user.membership_status === "PENDING") { %>
+  <% if (!locals.user.membership_status) { %>
   <a href="/join">Become a member</a>
   <% } %>
   <a href="/newmessage">Add new message</a>
@@ -46,13 +46,16 @@
   <div>
     <% locals.messages.forEach((msg) => { %>
     <div>
-      <% if (locals.user && (locals.user.membership_status !== "PENDING" || locals.user.username === msg.username)) { %>
+      <% if (locals.user && (locals.user.membership_status || locals.user.username === msg.username)) { %>
       <p><%= msg.username %> says:</p>
       <p><%=msg.message %></p>
       <p>On <%= msg.date_only.toLocaleDateString('en-GB') %></p>
       <% } else { %>
       <p><%= msg.username.replace(/./g, '*')%> says:</p>
       <p><%=msg.message %></p>
+      <% } %>
+      <% if (locals.user && locals.user.admin_status) { %>
+        <a href="/delmessage?deleteId=<%=msg.id%>">Delete</a>
       <% } %>
     </div>
     <% }) %>

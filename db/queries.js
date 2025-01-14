@@ -14,14 +14,14 @@ async function checkIfUserNameExists(username) {
 async function addUser(user, hashedPassword) {
     const query = 
     `
-    INSERT INTO users (firstname, lastname, username, password, membership_status)
-    VALUES ($1, $2, $3, $4, 'PENDING')
+    INSERT INTO users (firstname, lastname, username, password, membership_status, admin_status)
+    VALUES ($1, $2, $3, $4, $5, $6)
     `;
 
     const firstNameCap = user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1);
     const lastNameCap = user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1);
 
-    await pool.query(query, [firstNameCap, lastNameCap, user.username, hashedPassword]);
+    await pool.query(query, [firstNameCap, lastNameCap, user.username, hashedPassword, false, false]);
 }
 
 async function findUserWithUsername(username) {
@@ -36,13 +36,13 @@ async function findUserWithID(id) {
     return rows;
 }
 
-async function joinUser(user) {
+async function joinUser(user, isAdmin) {
     const query = `
     UPDATE users
-    SET membership_status = $1
-    WHERE id = $2
+    SET membership_status = $1, admin_status = $2
+    WHERE id = $3
     `
-    await pool.query(query, ['MEMBER', user.id]);
+    await pool.query(query, [true, isAdmin, user.id]);
 }
 
 async function  addNewMessage(message, user) {
@@ -65,6 +65,14 @@ async function getAllMessages() {
     return rows;
 }
 
+async function deleteMessage(id) {
+    const query = `
+    DELETE FROM messages
+    WHERE id = $1;
+    `
+    await pool.query(query, [id]);
+}
+
 module.exports = {
     checkIfUserNameExists,
     addUser,
@@ -72,5 +80,6 @@ module.exports = {
     findUserWithID,
     joinUser,
     addNewMessage,
-    getAllMessages
+    getAllMessages,
+    deleteMessage
 }
