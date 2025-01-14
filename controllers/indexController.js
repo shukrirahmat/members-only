@@ -1,11 +1,19 @@
 require("dotenv").config();
 const passport = require("passport");
-const db = require("../db/queries")
+const db = require("../db/queries");
 
-const getIndexPage = (req, res) => {
+const getIndexPage = async (req, res) => {
   const errorMessage = req.session.messages;
   req.session.messages = undefined;
-  res.render("homePage", { title: "Homepage", user: req.user, errors: errorMessage });
+
+  const messagesRows = await db.getAllMessages();
+
+  res.render("homePage", {
+    title: "Homepage",
+    user: req.user,
+    messages: messagesRows,
+    errors: errorMessage,
+  });
 };
 
 const logIn = passport.authenticate("local", {
@@ -24,24 +32,37 @@ const logOut = (req, res, next) => {
 };
 
 const getJoinPage = (req, res) => {
-  res.render("joinPage", {title: "Become a member"});
-}
+  if (req.user.membership_status !== "PENDING") {
+    return res.redirect("/");
+  }
+  res.render("joinPage", { title: "Become a member" });
+};
 
 const joinUser = async (req, res) => {
   if (!req.body.memberCode) {
-    return res.status(400).render("joinPage", {title: "Become a member", error: "Secret code required"});
+    return res
+      .status(400)
+      .render("joinPage", {
+        title: "Become a member",
+        error: "Secret code required",
+      });
   }
   if (req.body.memberCode !== process.env.MEMBER_CODE) {
-    return res.status(400).render("joinPage", {title: "Become a member", error: "Wrong secret code"});
+    return res
+      .status(400)
+      .render("joinPage", {
+        title: "Become a member",
+        error: "Wrong secret code",
+      });
   }
   await db.joinUser(req.user);
   res.render("joinSuccess");
-}
+};
 
 module.exports = {
   getIndexPage,
   logIn,
   logOut,
   getJoinPage,
-  joinUser
+  joinUser,
 };

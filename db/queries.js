@@ -45,10 +45,32 @@ async function joinUser(user) {
     await pool.query(query, ['MEMBER', user.id]);
 }
 
+async function  addNewMessage(message, user) {
+    const query = `
+    INSERT INTO messages (author_id, message, date_posted)
+    VALUES ($1, $2, NOW())
+    `
+    await pool.query(query, [user.id, message]);
+}
+
+async function getAllMessages() {
+    const query =`
+    SELECT messages.id, users.username, messages.message, messages.date_posted, messages.date_posted::date AS date_only
+    FROM messages
+    INNER JOIN users
+    ON users.id = messages.author_id
+    ORDER BY messages.date_posted DESC;
+    `
+    const {rows} = await pool.query(query);
+    return rows;
+}
+
 module.exports = {
     checkIfUserNameExists,
     addUser,
     findUserWithUsername,
     findUserWithID,
-    joinUser
+    joinUser,
+    addNewMessage,
+    getAllMessages
 }

@@ -8,6 +8,7 @@ const passport = require("passport");
 // Router requires
 const indexRouter = require("./routes/indexRouter");
 const signUpRouter = require("./routes/signUpRouter");
+const newMessageRouter = require("./routes/newMessageRouter");
 
 // Middleware setups
 app.use(
@@ -35,6 +36,7 @@ app.use((req, res, next) => {
 // Routes
 app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
+app.use("/newmessage", newMessageRouter);
 
 // Connecting to server
 const PORT = process.env.PORT || 3000;

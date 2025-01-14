@@ -5,6 +5,7 @@ const { argv } = require("node:process");
 const SQL = `
 
     DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS messages;
 
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -13,6 +14,13 @@ const SQL = `
         username VARCHAR (255),
         password VARCHAR (255),
         membership_status VARCHAR (255)
+    );
+
+    CREATE TABLE IF NOT EXISTS messages (
+      id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+      author_id INTEGER NOT NULL,
+      message TEXT,
+      date_posted TIMESTAMP NOT NULL
     );
     `;
 

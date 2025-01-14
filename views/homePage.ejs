@@ -11,15 +11,18 @@
 
   <% if (locals.user) { %>
   <h1>Welcome back, <%= user.firstname %></h1>
+  <% if (locals.user.membership_status === "PENDING") { %>
   <a href="/join">Become a member</a>
+  <% } %>
+  <a href="/newmessage">Add new message</a>
   <a href="/log-out">Log out</a>
-  
-  
+
+
   <% } else { %>
   <h1>Login</h1>
 
   <%- include("partials/logInErrors.ejs") %>
-  
+
   <form action="/log-in" method="post">
     <div>
       <label for="username">Username</label>
@@ -34,9 +37,27 @@
   </form>
 
   <hr>
-  <p>Don't have an account?</p>
+  <p>Dont have an account?</p>
   <a href="/sign-up">Sign Up</a>
   <% } %>
+
+  <hr>
+  <h2>Messages</h2>
+  <div>
+    <% locals.messages.forEach((msg) => { %>
+    <div>
+      <% if (locals.user && (locals.user.membership_status !== "PENDING" || locals.user.username === msg.username)) { %>
+      <p><%= msg.username %> says:</p>
+      <p><%=msg.message %></p>
+      <p>On <%= msg.date_only.toLocaleDateString('en-GB') %></p>
+      <% } else { %>
+      <p><%= msg.username.replace(/./g, '*')%> says:</p>
+      <p><%=msg.message %></p>
+      <% } %>
+    </div>
+    <% }) %>
+  </div>
+
 </body>
 
 </html>
