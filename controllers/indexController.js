@@ -62,7 +62,8 @@ const joinUser = async (req, res) => {
 };
 
 const deleteMessage = async (req, res) => {
-  const deleteId = req.query.deleteId;
+  const deleteId = req.body.deleteId;
+  console.log(deleteId);
   await db.deleteMessage(deleteId);
   res.redirect("/");
 }

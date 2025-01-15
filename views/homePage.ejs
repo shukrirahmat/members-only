@@ -63,7 +63,10 @@
       <p><%=msg.message %></p>
       <% } %>
       <% if (locals.user && locals.user.admin_status) { %>
-        <a href="/delmessage?deleteId=<%=msg.id%>">Delete</a>
+        <form action="/delmessage" method="post">
+          <input type="hidden" name="deleteId" value="<%=msg.id%>">
+          <input type="submit" value="DELETE">
+        </form>
       <% } %>
     </div>
     <% }) %>
