@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%=title %></title>
+</head>
+
+<body>
+  <h1><%=title %></h1>
+  <p> By becoming an Admin, you can delete messages</p>
+  <form action="/upgrade" method="post">
+    <input type="password" name="adminCode" placeholder="Enter admin code" maxlength="4">
+    <input type="submit" value="confirm">
+  </form>
+  <p><%=locals.error%></p>
+  <a href="/">Return home</a>
+</body>
+
+</html>

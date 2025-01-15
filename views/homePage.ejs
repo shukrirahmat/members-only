@@ -12,16 +12,20 @@
   <% if (locals.user) { %>
   <h1>Welcome back, <%= user.firstname %></h1>
   <% if (locals.user.admin_status) { %>
-    <p>STATUS: ADMIN</p>
+  <p>STATUS: ADMIN</p>
   <% } else if (locals.user.membership_status) { %>
-    <p>STATUS: MEMBER</p>
+  <p>STATUS: MEMBER</p>
   <% } else { %>
-    <p>STATUS: GUEST</p>
+  <p>STATUS: GUEST</p>
   <% } %>
 
   <% if (!locals.user.membership_status) { %>
   <a href="/join">Become a member</a>
   <% } %>
+  <% if (locals.user.membership_status && !locals.user.admin_status) { %>
+  <a href="/upgrade">Upgrade to Admin</a>
+  <% } %>
+
   <a href="/newmessage">Add new message</a>
   <a href="/log-out">Log out</a>
 
@@ -63,10 +67,10 @@
       <p><%=msg.message %></p>
       <% } %>
       <% if (locals.user && locals.user.admin_status) { %>
-        <form action="/delmessage" method="post">
-          <input type="hidden" name="deleteId" value="<%=msg.id%>">
-          <input type="submit" value="DELETE">
-        </form>
+      <form action="/delmessage" method="post">
+        <input type="hidden" name="deleteId" value="<%=msg.id%>">
+        <input type="submit" value="DELETE">
+      </form>
       <% } %>
     </div>
     <% }) %>

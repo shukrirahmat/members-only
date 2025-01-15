@@ -48,7 +48,7 @@ const joinUser = asyncHandler(async (req, res) => {
         error: "Secret code required",
       });
   }
-  if (req.body.memberCode !== process.env.MEMBER_CODE && req.body.memberCode !== process.env.ADMIN_CODE) {
+  if (req.body.memberCode !== process.env.MEMBER_CODE) {
     return res
       .status(400)
       .render("joinPage", {
@@ -56,17 +56,42 @@ const joinUser = asyncHandler(async (req, res) => {
         error: "Wrong secret code",
       });
   }
-  const isAdmin = req.body.memberCode === process.env.ADMIN_CODE;
-
-  await db.joinUser(req.user, isAdmin);
-  res.render("joinSuccess", {isAdmin});
+  await db.joinUser(req.user);
+  res.render("joinSuccess");
 });
 
 const deleteMessage = asyncHandler(async (req, res) => {
   const deleteId = req.body.deleteId;
-  console.log(deleteId);
   await db.deleteMessage(deleteId);
   res.redirect("/");
+});
+
+const getUpgradePage = (req, res) => {
+  if (req.user.admin_status) {
+    return res.redirect("/");
+  }
+  res.render("upgradePage", { title: "Become an Admin" });
+}
+
+const upgradeToAdmin = asyncHandler(async (req, res) => {
+  if (!req.body.adminCode) {
+    return res
+      .status(400)
+      .render("upgradePage", {
+        title: "Become an Admin",
+        error: "Admin code required",
+      });
+  }
+  if (req.body.adminCode !== process.env.ADMIN_CODE) {
+    return res
+      .status(400)
+      .render("upgradePage", {
+        title: "Become an Admin",
+        error: "Wrong Admin code",
+      });
+  }
+  await db.upgradeToAdmin(req.user);
+  res.render("joinSuccess", {isAdmin: true});
 });
 
 module.exports = {
@@ -75,5 +100,7 @@ module.exports = {
   logOut,
   getJoinPage,
   joinUser,
-  deleteMessage
+  deleteMessage,
+  getUpgradePage,
+  upgradeToAdmin
 };

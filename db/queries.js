@@ -36,13 +36,13 @@ async function findUserWithID(id) {
     return rows;
 }
 
-async function joinUser(user, isAdmin) {
+async function joinUser(user) {
     const query = `
     UPDATE users
-    SET membership_status = $1, admin_status = $2
-    WHERE id = $3
+    SET membership_status = $1
+    WHERE id = $2
     `
-    await pool.query(query, [true, isAdmin, user.id]);
+    await pool.query(query, [true, user.id]);
 }
 
 async function  addNewMessage(message, user) {
@@ -73,6 +73,15 @@ async function deleteMessage(id) {
     await pool.query(query, [id]);
 }
 
+async function upgradeToAdmin(user) {
+    const query = `
+    UPDATE users
+    SET admin_status = $1
+    WHERE id = $2
+    `
+    await pool.query(query, [true, user.id]);
+}
+
 module.exports = {
     checkIfUserNameExists,
     addUser,
@@ -81,5 +90,6 @@ module.exports = {
     joinUser,
     addNewMessage,
     getAllMessages,
-    deleteMessage
+    deleteMessage,
+    upgradeToAdmin
 }
