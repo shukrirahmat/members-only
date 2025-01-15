@@ -47,7 +47,7 @@ const joinUser = async (req, res) => {
         error: "Secret code required",
       });
   }
-  if (req.body.memberCode !== (process.env.MEMBER_CODE && process.env.ADMIN_CODE)) {
+  if (req.body.memberCode !== process.env.MEMBER_CODE && req.body.memberCode !== process.env.ADMIN_CODE) {
     return res
       .status(400)
       .render("joinPage", {
