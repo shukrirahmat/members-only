@@ -1,8 +1,9 @@
 require("dotenv").config();
 const passport = require("passport");
 const db = require("../db/queries");
+const asyncHandler = require("express-async-handler");
 
-const getIndexPage = async (req, res) => {
+const getIndexPage = asyncHandler(async (req, res) => {
   const errorMessage = req.session.messages;
   req.session.messages = undefined;
 
@@ -14,7 +15,7 @@ const getIndexPage = async (req, res) => {
     messages: messagesRows,
     errors: errorMessage,
   });
-};
+});
 
 const logIn = passport.authenticate("local", {
   successRedirect: "/",
@@ -38,7 +39,7 @@ const getJoinPage = (req, res) => {
   res.render("joinPage", { title: "Become a member" });
 };
 
-const joinUser = async (req, res) => {
+const joinUser = asyncHandler(async (req, res) => {
   if (!req.body.memberCode) {
     return res
       .status(400)
@@ -59,14 +60,14 @@ const joinUser = async (req, res) => {
 
   await db.joinUser(req.user, isAdmin);
   res.render("joinSuccess", {isAdmin});
-};
+});
 
-const deleteMessage = async (req, res) => {
+const deleteMessage = asyncHandler(async (req, res) => {
   const deleteId = req.body.deleteId;
   console.log(deleteId);
   await db.deleteMessage(deleteId);
   res.redirect("/");
-}
+});
 
 module.exports = {
   getIndexPage,

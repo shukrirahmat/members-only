@@ -1,6 +1,7 @@
 const { body, validationResult } = require("express-validator");
 const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
+const asyncHandler = require("express-async-handler");
 
 const validateUser = [
     body("firstname")
@@ -27,7 +28,7 @@ const getSignUpPage = (req, res) => {
 
 const signUpNewMember = [
     validateUser,
-    async (req, res) => {
+    asyncHandler(async (req, res) => {
         const errorArray = validationResult(req).array();
 
         if (req.body.password !== req.body.password2) {
@@ -51,7 +52,7 @@ const signUpNewMember = [
             else await db.addUser(req.body, hashedPassword);
         })
         res.redirect("/");
-    }
+    })
 ]
 
 module.exports = {

@@ -48,6 +48,15 @@ app.use("/", indexRouter);
 app.use("/sign-up", signUpRouter);
 app.use("/newmessage", newMessageRouter);
 
+//Error Handling
+const PageNotFoundError = require("./errors/pageNotFoundError");
+app.use((req, res, next) => {
+  throw new PageNotFoundError("The requested page could not be found");
+});
+app.use((err, req, res, next) => {
+  res.status(err.statusCode || 500).render("errorPage", {title: "Error", error: err.message, code : err.statusCode || 500});
+});
+
 // Connecting to server
 const PORT = process.env.PORT || 3000;
 
