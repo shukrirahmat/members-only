@@ -4,8 +4,8 @@
 }
 
 @font-face {
-    font-family: "Audiowide";
-    src: url(fonts/Audiowide-Regular.ttf);
+  font-family: "Audiowide";
+  src: url(fonts/Audiowide-Regular.ttf);
 }
 
 * {
@@ -15,105 +15,175 @@
 }
 
 body {
-  padding: 20px;
+  padding: 5px 20px;
   margin: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-family: "Exo2", sans-serif;
   background-color: rgb(20, 20, 20);
+  gap: 20px;
 }
 
 /* HEADER */
 
 .header {
-    background-color: rgb(20, 20, 20);
-    display: flex;
-    flex-direction: column;
-    min-height: 200px;
-    justify-content: space-between;
-    padding: 20px 20px 20px 0;
-    border-bottom: 4px solid white;
+  background-color: rgb(20, 20, 20);
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 2px solid white;
 }
 
 .header .title {
-    font-family: "Audiowide", sans-serif;
-    color: white;
-    font-size: 60px;
-    background-color: rgb(20, 20, 20);
-    
+  font-family: "Audiowide", sans-serif;
+  color: white;
+  font-size: 60px;
+  background-color: rgb(20, 20, 20);
+  align-self: center;
+}
+
+.header .title a {
+  font-family: "Audiowide", sans-serif;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .header .loginErrorBox {
-    color: white;
-    align-self: flex-end;
-    position: absolute;
-    top: -25px;
+  color: white;
+  align-self: flex-end;
+  position: absolute;
+  top: -25px;
 }
 
 .header .loginBox {
-    background-color: rgb(20, 20, 20);
-    align-self: flex-end;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    gap:5px;
-    position: relative;
-
+  background-color: rgb(20, 20, 20);
+  align-self: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
 }
 
 .header .loginBox form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-    background-color: rgb(20, 20, 20);
-    
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  background-color: rgb(20, 20, 20);
 }
 
 .header .loginBox form div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
 }
 
 .header .loginBox form div input {
-    background-color: rgb(193, 255, 67);
-    border: none;
-    font-size: 18px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-family: "Exo2", sans-serif;
+  background-color: rgb(193, 255, 67);
+  border: none;
+  font-size: 18px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: "Exo2", sans-serif;
 }
 
 .header .loginBox form button {
-    background-color: rgb(20, 20, 20);
-    border: 1px solid white;
-    font-size: 18px;
-    font-family: "Exo2", sans-serif;
-    color: white;
-    padding: 2px 15px;
-    border-radius: 4px;
+  background-color: rgb(20, 20, 20);
+  border: 1px solid white;
+  font-size: 18px;
+  font-family: "Exo2", sans-serif;
+  color: white;
+  padding: 2px 15px;
+  border-radius: 4px;
 }
 
 .header .loginBox form button:hover {
-    background-color: rgb(193, 255, 67);
-    cursor: pointer;
-    color: black;
-    border: 1px solid black;
+  background-color: rgb(193, 255, 67);
+  cursor: pointer;
+  color: black;
+  border: 1px solid black;
 }
 
 .header .signUpQuestion {
-    background-color: rgb(20, 20, 20);
-    display: flex;
-    flex-direction: row;
-    align-self: flex-end;
-    gap: 10px;
-    color: white;
+  background-color: rgb(20, 20, 20);
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  gap: 10px;
+  color: white;
 }
 
 .header .signUpQuestion a {
-    color: rgb(193, 255, 67);
+  color: rgb(193, 255, 67);
+}
+
+/* MIDDLE */
+
+.middle {
+  padding: 0px 200px;
+  align-self: center;
+}
+
+.messageContainer {
+  background-color: rgb(30, 30, 30);
+  color: white;
+  max-width: 600px;
+  align-self: center;
+  max-height: 600px;
+  overflow-y: scroll;
+  padding: 25px 35px 25px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.messageContainer .messagebox {
+  background-color: rgb(193, 255, 67);
+  color: black;
+  border-radius: 10px;
+  padding: 20px;
+  align-self: baseline;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.messageContainer .messageAuthor {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.messageContainer .messageDate {
+    font-weight: bold;
+    align-self: flex-end;
+}
+
+/* SCROLLBAR */
+.messageContainer::-webkit-scrollbar {
+  width: 15px;
+}
+
+.messageContainer::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.messageContainer::-webkit-scrollbar-thumb {
+  background: rgb(193, 255, 67);
+  border-radius: 10px;
+}
+
+/* FOOTER */
+.footer {
+    min-width: 50px;
+    color: white;
+    text-align: center;
+    border-top: 2px solid white;
+    padding: 10px;
 }

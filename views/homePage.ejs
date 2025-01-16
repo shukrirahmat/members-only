@@ -10,7 +10,7 @@
 
 <body>
   <div class="header">
-    <h1 class="title">SECRET TEXTS</h1>
+    <h1 class="title"><a href="/">SECRET TEXTS</a></h1>
 
     <% if (locals.user) { %>
     <h1>Welcome back, <%= user.firstname %></h1>
@@ -61,16 +61,16 @@
     <% } %>
   </div>
 
-  <h2>Messages</h2>
-  <div>
+  <div class="middle">
+  <div class="messageContainer">
     <% locals.messages.forEach((msg) => { %>
-    <div>
+    <div class="messagebox">
       <% if (locals.user && (locals.user.membership_status || locals.user.username === msg.username)) { %>
-      <p><%= msg.username %> says:</p>
+      <p class="messageAuthor"><%= msg.username %> :</p>
       <p><%=msg.message %></p>
-      <p>On <%= msg.date_only.toLocaleDateString('en-GB') %></p>
+      <p class="messageDate"><%= msg.date_only.toLocaleDateString('en-GB') %></p>
       <% } else { %>
-      <p><%= msg.username.replace(/./g, '*')%> says:</p>
+      <p class="messageAuthor"><%= msg.username.replace(/./g, '*')%> :</p>
       <p><%=msg.message %></p>
       <% } %>
       <% if (locals.user && locals.user.admin_status) { %>
@@ -82,7 +82,9 @@
     </div>
     <% }) %>
   </div>
+</div>
 
+<%- include("partials/footer.ejs") %>
 </body>
 
 </html>
