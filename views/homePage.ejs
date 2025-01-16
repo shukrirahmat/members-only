@@ -13,24 +13,28 @@
     <h1 class="title"><a href="/">SECRET TEXTS</a></h1>
 
     <% if (locals.user) { %>
-    <h1>Welcome back, <%= user.firstname %></h1>
-    <% if (locals.user.admin_status) { %>
-    <p>STATUS: ADMIN</p>
-    <% } else if (locals.user.membership_status) { %>
-    <p>STATUS: MEMBER</p>
-    <% } else { %>
-    <p>STATUS: GUEST</p>
-    <% } %>
+    <div class="welcomeMessage">
+      <h1>Welcome back, <%= user.firstname %> <%= user.lastname %></h1>
+      <% if (locals.user.admin_status) { %>
+      <p>STATUS: ADMIN</p>
+      <% } else if (locals.user.membership_status) { %>
+      <p>STATUS: MEMBER</p>
+      <% } else { %>
+      <p>STATUS: GUEST</p>
+      <% } %>
+    </div>
 
-    <% if (!locals.user.membership_status) { %>
-    <a href="/join">Become a member</a>
-    <% } %>
-    <% if (locals.user.membership_status && !locals.user.admin_status) { %>
-    <a href="/upgrade">Upgrade to Admin</a>
-    <% } %>
+    <div class="navButtons">
+      <% if (!locals.user.membership_status) { %>
+      <a href="/join">BECOME A MEMBER</a>
+      <% } %>
+      <% if (locals.user.membership_status && !locals.user.admin_status) { %>
+      <a href="/upgrade">UPGRADE TO ADMIN</a>
+      <% } %>
 
-    <a href="/newmessage">Add new message</a>
-    <a href="/log-out">Log out</a>
+      <a href="/newmessage">ADD NEW MESSAGE</a>
+      <a href="/log-out">LOG OUT</a>
+    </div>
 
 
     <% } else { %>
@@ -62,29 +66,29 @@
   </div>
 
   <div class="middle">
-  <div class="messageContainer">
-    <% locals.messages.forEach((msg) => { %>
-    <div class="messagebox">
-      <% if (locals.user && (locals.user.membership_status || locals.user.username === msg.username)) { %>
-      <p class="messageAuthor"><%= msg.username %> :</p>
-      <p><%=msg.message %></p>
-      <p class="messageDate"><%= msg.date_only.toLocaleDateString('en-GB') %></p>
-      <% } else { %>
-      <p class="messageAuthor"><%= msg.username.replace(/./g, '*')%> :</p>
-      <p><%=msg.message %></p>
-      <% } %>
-      <% if (locals.user && locals.user.admin_status) { %>
-      <form action="/delmessage" method="post">
-        <input type="hidden" name="deleteId" value="<%=msg.id%>">
-        <input type="submit" value="DELETE">
-      </form>
-      <% } %>
+    <div class="messageContainer">
+      <% locals.messages.forEach((msg) => { %>
+      <div class="messagebox">
+        <% if (locals.user && (locals.user.membership_status || locals.user.username === msg.username)) { %>
+        <p class="messageAuthor"><%= msg.username %> :</p>
+        <p><%=msg.message %></p>
+        <p class="messageDate"><%= msg.date_only.toLocaleDateString('en-GB') %></p>
+        <% } else { %>
+        <p class="messageAuthor"><%= msg.username.replace(/./g, '*')%> :</p>
+        <p><%=msg.message %></p>
+        <% } %>
+        <% if (locals.user && locals.user.admin_status) { %>
+        <form action="/delmessage" method="post">
+          <input type="hidden" name="deleteId" value="<%=msg.id%>">
+          <button class="deleteButton" type="submit">DELETE</button>
+        </form>
+        <% } %>
+      </div>
+      <% }) %>
     </div>
-    <% }) %>
   </div>
-</div>
 
-<%- include("partials/footer.ejs") %>
+  <%- include("partials/footer.ejs") %>
 </body>
 
 </html>
