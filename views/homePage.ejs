@@ -5,55 +5,62 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%=title %></title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 
 <body>
+  <div class="header">
+    <h1 class="title">SECRET MESSAGES</h1>
 
-  <% if (locals.user) { %>
-  <h1>Welcome back, <%= user.firstname %></h1>
-  <% if (locals.user.admin_status) { %>
-  <p>STATUS: ADMIN</p>
-  <% } else if (locals.user.membership_status) { %>
-  <p>STATUS: MEMBER</p>
-  <% } else { %>
-  <p>STATUS: GUEST</p>
-  <% } %>
+    <% if (locals.user) { %>
+    <h1>Welcome back, <%= user.firstname %></h1>
+    <% if (locals.user.admin_status) { %>
+    <p>STATUS: ADMIN</p>
+    <% } else if (locals.user.membership_status) { %>
+    <p>STATUS: MEMBER</p>
+    <% } else { %>
+    <p>STATUS: GUEST</p>
+    <% } %>
 
-  <% if (!locals.user.membership_status) { %>
-  <a href="/join">Become a member</a>
-  <% } %>
-  <% if (locals.user.membership_status && !locals.user.admin_status) { %>
-  <a href="/upgrade">Upgrade to Admin</a>
-  <% } %>
+    <% if (!locals.user.membership_status) { %>
+    <a href="/join">Become a member</a>
+    <% } %>
+    <% if (locals.user.membership_status && !locals.user.admin_status) { %>
+    <a href="/upgrade">Upgrade to Admin</a>
+    <% } %>
 
-  <a href="/newmessage">Add new message</a>
-  <a href="/log-out">Log out</a>
+    <a href="/newmessage">Add new message</a>
+    <a href="/log-out">Log out</a>
 
 
-  <% } else { %>
-  <h1>Login</h1>
+    <% } else { %>
 
-  <%- include("partials/logInErrors.ejs") %>
+    <div class="loginBox">
+      <div class="loginErrorBox">
+        <%- include("partials/logInErrors.ejs") %>
+      </div>
+      <form action="/log-in" method="post">
+        <div>
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" />
+        </div>
+        <button type="submit">LOG IN</button>
 
-  <form action="/log-in" method="post">
-    <div>
-      <label for="username">Username</label>
-      <input id="username" name="username" type="text" />
+      </form>
     </div>
-    <div>
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" />
+
+
+    <div class="signUpQuestion">
+      <p>Dont have an account?</p>
+      <a href="/sign-up">Sign Up</a>
     </div>
-    <input type="submit" value="Log-in">
+    <% } %>
+  </div>
 
-  </form>
-
-  <hr>
-  <p>Dont have an account?</p>
-  <a href="/sign-up">Sign Up</a>
-  <% } %>
-
-  <hr>
   <h2>Messages</h2>
   <div>
     <% locals.messages.forEach((msg) => { %>
