@@ -31,7 +31,7 @@ async function main(build) {
   console.log("Seeding...");
   const client = new Client({
     connectionString:
-      build == "production" ? process.env.CONNECTION_STR : localConnection,
+      build == "production" ? process.env.PRODUCTION_STRING : localConnection,
   });
   await client.connect();
   await client.query(SQL);
