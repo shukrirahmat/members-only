@@ -33,6 +33,9 @@ const logOut = (req, res, next) => {
 };
 
 const getJoinPage = (req, res) => {
+  if (!req.user) {
+    return res.redirect("/");
+  }
   if (req.user.membership_status) {
     return res.redirect("/");
   }
@@ -67,6 +70,10 @@ const deleteMessage = asyncHandler(async (req, res) => {
 });
 
 const getUpgradePage = (req, res) => {
+  if (!req.user) {
+    return res.redirect("/");
+  }
+
   if (req.user.admin_status) {
     return res.redirect("/");
   }

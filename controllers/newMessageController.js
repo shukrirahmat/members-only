@@ -2,6 +2,9 @@ const db = require("../db/queries");
 const asyncHandler = require("express-async-handler");
 
 const getMessageForm = (req, res) => {
+  if (!req.user) {
+    return res.redirect("/");
+  }
   res.render("messageForm", { title: "Add New Message" });
 };
 
