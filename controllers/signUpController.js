@@ -51,7 +51,7 @@ const signUpNewMember = [
             if (err) throw err;
             else await db.addUser(req.body, hashedPassword);
         })
-        res.redirect("/");
+        res.render("signUpSuccess", {username: req.body.username});
     })
 ]
 

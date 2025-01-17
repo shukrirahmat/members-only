@@ -37,7 +37,7 @@ body {
   border-bottom: 2px solid white;
 }
 
-.header .title {
+.header .logo {
   font-family: "Audiowide", sans-serif;
   color: white;
   font-size: 60px;
@@ -45,7 +45,7 @@ body {
   align-self: center;
 }
 
-.header .title a {
+.header .logo a {
   font-family: "Audiowide", sans-serif;
   color: white;
   text-decoration: none;
@@ -169,16 +169,18 @@ body {
 /* MIDDLE */
 
 .middle {
-  padding: 0px 200px;
   align-self: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .messageContainer {
   background-color: rgb(30, 30, 30);
   color: white;
-  max-width: 600px;
+  width: 600px;
   align-self: center;
-  max-height: 600px;
+  height: 100vh;
   overflow-y: scroll;
   padding: 25px 35px 25px 50px;
   display: flex;
@@ -250,4 +252,85 @@ body {
   text-align: center;
   border-top: 2px solid white;
   padding: 10px;
+}
+
+/* SIGN-UP PAGE */
+.header .title {
+  color: white;
+  font-size: 35px;
+  align-self: center;
+}
+
+.middle .signUpForm {
+  background-color: rgb(30, 30, 30);
+  color: white;
+  width: 400px;
+  align-self: center;
+  padding: 25px 50px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.middle .signUpForm div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.middle .signUpForm div label{
+  font-size: 14px;
+}
+
+.middle .signUpForm input {
+  background-color: rgb(193, 255, 67);
+  border: none;
+  font-size: 18px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: "Exo2", sans-serif;
+}
+
+.middle .signUpForm .signUpError{
+  align-self: center;
+  font-size: 14px;
+}
+
+.middle .signUpForm .signUpBtn{
+  align-self: center;
+  background-color: rgb(30, 30, 30);
+  border: 1px solid white;
+  font-size: 16px;
+  font-family: "Audiowide", sans-serif;
+  color: white;
+  padding: 2px 15px;
+  border-radius: 4px;
+}
+
+.middle .signUpForm .signUpBtn:hover{
+  background-color: rgb(193, 255, 67);
+  cursor: pointer;
+  color: rgb(30, 30, 30);
+  border: 1px solid rgb(30, 30, 30);
+}
+
+.middle .tx {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 50px;
+}
+
+.middle .tx p {
+  color: white;
+  font-size: 18px;
+}
+
+.middle .tx a {
+  color: rgb(193, 255, 67);
+  font-size: 18px;
+  align-self: center;
 }
