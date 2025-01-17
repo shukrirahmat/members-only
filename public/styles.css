@@ -180,7 +180,7 @@ body {
   color: white;
   width: 600px;
   align-self: center;
-  height: 100vh;
+  max-height: 100vh;
   overflow-y: scroll;
   padding: 25px 35px 25px 50px;
   display: flex;

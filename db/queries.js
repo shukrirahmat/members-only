@@ -55,7 +55,7 @@ async function  addNewMessage(message, user) {
 
 async function getAllMessages() {
     const query =`
-    SELECT messages.id, users.username, messages.message, messages.date_posted, messages.date_posted::date AS date_only
+    SELECT messages.id, users.username, messages.message, messages.date_posted, TO_CHAR(date_posted, 'DD/MM/YYYY  HH:MI') AS formatted_date
     FROM messages
     INNER JOIN users
     ON users.id = messages.author_id

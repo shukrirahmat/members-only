@@ -66,13 +66,14 @@
   </div>
 
   <div class="middle">
+    <% if (locals.messages.length > 0) { %>
     <div class="messageContainer">
       <% locals.messages.forEach((msg) => { %>
       <div class="messagebox">
         <% if (locals.user && (locals.user.membership_status || locals.user.username === msg.username)) { %>
         <p class="messageAuthor"><%= msg.username %> :</p>
         <p><%=msg.message %></p>
-        <p class="messageDate"><%= msg.date_only.toLocaleDateString('en-GB') %></p>
+        <p class="messageDate"><%=  msg.formatted_date %></p>
         <% } else { %>
         <p class="messageAuthor"><%= msg.username.replace(/./g, '*')%> :</p>
         <p><%=msg.message %></p>
@@ -86,6 +87,7 @@
       </div>
       <% }) %>
     </div>
+  <% } %>
   </div>
 
   <%- include("partials/footer.ejs") %>
