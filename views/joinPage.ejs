@@ -9,14 +9,24 @@
 </head>
 
 <body>
-  <h1><%=title %></h1>
-  <p> A member will be able to see the author and date of messages</p>
-  <form action="/join" method="post">
-    <input type="password" name="memberCode" placeholder="Enter secret code" maxlength="4">
-    <input type="submit" value="Join">
-  </form>
-  <p><%=locals.error%></p>
-  <a href="/">Return home</a>
+  <div class="header">
+    <h1 class="logo"><a href="/">SECRET TEXTS</a></h1>
+    <h1 class="title">Become a Member</h1>
+  </div>
+  <div class="middle">
+    <form class="memberForm" action="/join" method="post">
+      <p> A member can see the author and date of all messages</p>
+      <div>
+        <% if (locals.error) {  %>
+          <li class="errorMsg"><%=locals.error%></li>
+        <% } %>
+        <input type="password" name="memberCode" placeholder="Enter secret code" maxlength="4">
+        <button type="submit">JOIN</button>
+        <p class="hint">(Check out the Github repo for the code)</p>
+      </div>
+    </form>
+  </div>
+  <%- include("partials/footer.ejs") %>
 </body>
 
 </html>

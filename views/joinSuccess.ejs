@@ -9,12 +9,17 @@
 </head>
 
 <body>
-  <% if (locals.isAdmin) { %>
-  <h1>You have successfully become an Admin</h1>
-  <% } else { %>
-  <h1>You have successfully become a member!</h1>
-  <% } %>
-  <a href="/">Return home</a>
+  <div class="header">
+    <h1 class="logo"><a href="/">SECRET TEXTS</a></h1>
+    <h1 class="title">Become a Member</h1>
+  </div>
+  <div class="middle">
+    <div class="tx">
+        <p>You have successfully became a member!</p>
+        <a href="/">Return</a>
+    </div>
+  </div>
+  <%- include("partials/footer.ejs") %>
 </body>
 
 </html>

@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=title %></title>
-    <link rel="stylesheet" href="/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%=title %></title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
-    <h1>Oops! we ran into some problems.</h1>
-    <h2>Error code: <%=code %></h2>
-    <p><%=error %></p>
+  <div class="header">
+    <h1 class="logo"><a href="/">SECRET TEXTS</a></h1>
+    <h1 class="title">Oopsie!</h1>
+  </div>
+  <div class="middle">
+    <div class="tx">
+        <h2>We ran into some problems.</h2>
+        <p><%=code %> : <%=error %></p>
+        <a href="/">Return</a>
+    </div>
+  </div>
+  <%- include("partials/footer.ejs") %>
 </body>
+
 </html>

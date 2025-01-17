@@ -91,7 +91,7 @@ const upgradeToAdmin = asyncHandler(async (req, res) => {
       });
   }
   await db.upgradeToAdmin(req.user);
-  res.render("joinSuccess", {isAdmin: true});
+  res.render("upgradeSuccess");
 });
 
 module.exports = {

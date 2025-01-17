@@ -193,7 +193,7 @@ body {
   color: black;
   border-radius: 10px;
   padding: 20px;
-  align-self: baseline;
+  align-self: stretch;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -262,7 +262,7 @@ body {
 }
 
 .middle .signUpForm {
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(20, 20, 20);
   color: white;
   width: 400px;
   align-self: center;
@@ -301,7 +301,7 @@ body {
 
 .middle .signUpForm .signUpBtn{
   align-self: center;
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(20, 20, 20);
   border: 1px solid white;
   font-size: 16px;
   font-family: "Audiowide", sans-serif;
@@ -314,7 +314,7 @@ body {
   background-color: rgb(193, 255, 67);
   cursor: pointer;
   color: rgb(30, 30, 30);
-  border: 1px solid rgb(30, 30, 30);
+  border: 1px solid rgb(20, 20, 20);
 }
 
 .middle .tx {
@@ -322,6 +322,7 @@ body {
   flex-direction: column;
   gap: 20px;
   padding-top: 50px;
+  align-items: center;
 }
 
 .middle .tx p {
@@ -334,3 +335,118 @@ body {
   font-size: 18px;
   align-self: center;
 }
+
+/* NEW MESSAGE PAGE */
+
+.middle .newMessageForm {
+  background-color: rgb(20, 20, 20);
+  color: white;
+  width: 600px;
+  align-self: center;
+  padding: 25px 50px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.middle .newMessageForm textarea {
+  flex: 1;
+  background-color: rgb(193, 255, 67);
+  border-radius: 4px;
+  padding: 10px;
+  font-family: "Exo2", sans-serif;
+  resize: none;
+  border: none;
+}
+
+.middle .newMessageForm button{
+  align-self: center;
+  background-color: rgb(20, 20, 20);
+  border: 1px solid white;
+  font-size: 16px;
+  font-family: "Audiowide", sans-serif;
+  color: white;
+  padding: 2px 15px;
+  border-radius: 4px;
+}
+.middle .newMessageForm button:hover{
+  background-color: rgb(193, 255, 67);
+  cursor: pointer;
+  color: rgb(30, 30, 30);
+  border: 1px solid rgb(20, 20, 20);
+}
+
+/* BECOME A MEMBER PAGE */
+.middle .memberForm {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding-top: 50px;
+}
+
+.middle .memberForm div{
+  align-self: center;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  align-items: center;
+}
+
+.middle .memberForm input {
+  background-color: rgb(193, 255, 67);
+  border: none;
+  font-size: 18px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: "Exo2", sans-serif;
+  text-align: center;
+}
+
+.middle .memberForm button {
+  background-color: rgb(20, 20, 20);
+  border: 1px solid white;
+  font-size: 16px;
+  font-family: "Audiowide", sans-serif;
+  color: white;
+  padding: 2px 15px;
+  border-radius: 4px;
+}
+
+.middle .memberForm button:hover {
+  background-color: rgb(193, 255, 67);
+  cursor: pointer;
+  color: black;
+  border: 1px solid black;
+}
+
+.middle .memberForm > p {
+  font-size: 18px;
+  text-align: center;
+}
+
+.middle .memberForm .errorMsg {
+  font-size: 14px;
+  position: absolute;
+  top: -25px;
+}
+
+.middle .memberForm .hint {
+  font-size: 12px;
+  color: rgb(193, 255, 67);
+  text-align: center;
+  bottom: -15px;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
+
+.middle .tx h2 {
+  color: white;
+  font-weight: normal;
+}
+
+

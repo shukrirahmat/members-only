@@ -4,25 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
+  <title>Success</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 
 <body>
   <div class="header">
     <h1 class="logo"><a href="/">SECRET TEXTS</a></h1>
-    <h1 class="title">Add New Message</h1>
+    <h1 class="title">Upgrade to Admin</h1>
   </div>
   <div class="middle">
-    <form class="newMessageForm" action="/newmessage" method="post">
-      <p><%=locals.error%></p>
-      <textarea id="message" name="message" placeholder="Write something here..."></textarea>
-      <button type="submit">POST</button>
-    </form>
+    <div class="tx">
+        <p>You have successfully became an Admin!</p>
+        <a href="/">Return</a>
+    </div>
   </div>
   <%- include("partials/footer.ejs") %>
-
-
 </body>
 
 </html>
