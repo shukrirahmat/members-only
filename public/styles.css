@@ -495,5 +495,13 @@ body {
     flex-direction: column;
     gap: 50px;
   }
+
+  .middle .newMessageForm {
+    width: 100%;
+  }
+
+  .middle .newMessageForm textarea {
+    width: 100%;
+  }
 }
 
